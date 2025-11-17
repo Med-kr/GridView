@@ -1,0 +1,123 @@
+/*======================== Root ========================*/
+
+@font-face {
+    font-family: "Mogra", system-ui;
+    src: url("/fonts/MyFont-Regular.woff2") format("woff2"),
+        url("/fonts/MyFont-Regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+}
+
+/*======================== Root ========================*/
+:root{
+
+--color-a  :  #fff
+--color-trois  :  #1A535C;
+--color-dex  :  #4ECDC4
+--color-b  :  ##F5F5F5
+--color-qua  :  #FF6B6B
+--color-cinq :  #FFA800
+--color-text :  #000
+--font-title: "Roboto Slab", serif;
+--font-text: "Open Sans", sans-serif;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: var(--font-text);
+    background-image: url(images/arriere.webp);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: var(color-text);
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffffde;
+    padding: 15px 40px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+header #logo img{
+    height: 100px;
+    width: auto;
+}
+
+.ajoute-e button{
+    background-color: rgb(77, 255, 133);
+    height: 30px;
+    width: 150px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+}
+.ajoute-e button:hover{
+    background-color: aqua;
+
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 20px;
+    height: auto;
+
+}
+.non-assigné{
+    background-color: aliceblue;
+    margin: 30px;
+    padding: 20px;
+    width: 300px;
+    height: 60vh;
+}
+
+
+
+.P-etage{
+    display: grid;
+        grid-template-columns:auto auto auto;
+    background-color: aqua;
+    gap: 20px;
+    height: 100%;
+    margin: 30px;
+    padding: 20px;
+    text-align: center;
+    grid-area: span;
+
+}
+
+.conférence, .Réception, .serveurs{
+    background-color: red;
+    grid-area: span;
+}
+
+.sécurité, .personnel, .archives{
+ background-color: green;
+}
+
+.P-etage img, .non-assigné img{
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    display: inline;
+  mar
+}
+h2 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  display: inline-block;
+  align-items: center;
+  position: relative;
+  bottom: 0px;
+}
