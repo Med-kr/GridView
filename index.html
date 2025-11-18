@@ -1,105 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Gestion des employés</title>
 </head>
 <body>
 
-    <header class="logo-ajoute">
-
-        <div id="logo">
-            <img src="images/logo-s.webp" alt="">
-        </div>
-
-        <div class="ajoute-e">
-            <button>
-                + Ajouter un employé
-            </button>
-        </div>
-    </header>
-<!-- 
-    <div class="form">
-        <form id="employé">
-            <label for="nom">Nom complet *</label>
-            <input type="text" placeholder="nom compléte" required>
-            <label for="Employé">Role *</label>
-            <select value="Employé">
-                <option value="Séction Le role d'employé">Séction Le role d'employé</option>
-                <option value="Receptionaire">Réceptionniste</option>
-                <option value="Technicien IT">Technicien IT</option>
-                <option value="Agent de sécurité">Agent de sécurité</option>
-                <option value="Directeur">Directeur</option>
-                <option value="Nettoyage">Nettoyage</option>
-                <option value="Autres rôles">Employé</option>
-                <option value="Employé">Employé</option>
-                Réception → uniquement les Réceptionnistes
-Techniciens IT
-Agents de sécurité
-Manager → peut être affecté partout
-Nettoyage → peut être affecté partout sauf à la Salle d’archives
-Autres rôles → accès libre sauf aux zones restreintes
-            </select>
-        </form>
-        <label for="email">Email *</label>
-        <input type="email" placeholder="user@gmail.com" required>
-        <label for="Télephone">Télephone</label><br>
-        <input type="tel" placeholder="0690975335" required>
-        <label for="email">URL de la photo</label>
-        <input type="url" placeholder="https:exemple.com/photo.jpg">
-    
+<header class="logo-ajoute">
+    <div id="logo">
+        <img src="images/logo-s.webp" alt="Logo">
     </div>
+    <div class="ajoute-e">
+        <button class="open-btn">+ Ajouter un employé</button>
+    </div>
+</header>
 
+<div class="overlay">
+    <div class="modal">
+        <div class="modal-header">
+            Ajouter un nouvel employé
+            <button class="close">×</button>
+        </div>
 
+        <label>Nom complet *</label>
+        <input type="text" placeholder="Jean Dupont">
 
--->
-<div class="grid">
+        <label>Rôle *</label>
+        <select>
+            <option>Employé</option>
+            <option>Réceptionniste</option>
+            <option>Technicien IT</option>
+            <option>Agent de sécurité</option>
+            <option>Directeur</option>
+            <option>Nettoyage</option>
+        </select>
 
-<aside class="non-assigné">
-    <img src="images/task.webp" alt="">
-    <h2>Personnel non assigné</h2>
+        <label>Photo (URL)</label>
+        <input id="photoInput" type="url" placeholder="https://exemple.com/photo.jpg">
+        <img id="avatar" class="avatar-preview">
 
-</aside>
-<main class="P-etage">
+        <label>Email *</label>
+        <input type="email" placeholder="jean.dupont@example.com">
 
-    <section class="conférence">
-        <img src="images/conference.webp" alt="">
-        <h2>Salle de conférence</h2>
-    </section>
-    <section class="Réception">
-        <img src="images/reception.webp" alt="">
-        <h2>Réception</h2>
-    </section>
-    <section class="serveurs">
-        <img src="images/database.webp" alt="">
-        <h2>Salle des serveurs</h2>
-    </section>
-    <section class="sécurité">
-        <img src="images/cyber-security.webp" alt="">
-        <h2>Salle de sécurité</h2>
-    </section>
-    <section class="personnel">
-        <img src="images/friends.webp" alt="">
-        <h2>Salle du personnel</h2>
-    </section>
-    <section class="archives">
-        <img src="images/folder.webp" alt="">
-        <h2>Salle d'archives</h2>
-    </section>
+        <label>Téléphone *</label>
+        <input type="tel" placeholder="06 12 34 56 78">
 
-</main>
+        <div class="experience-section">
+            <h3>Expériences professionnelles</h3>
+            <button type="button" class="add-experience-btn">+ Ajouter</button>
+        </div>
+        <div id="experience-list" class="experience-list-container">
+            <div class="no-experience">Aucune expérience ajoutée</div>
+        </div>
 
+        <div class="modal-footer">
+            <button class="btn-cancel">Annuler</button>
+            <button class="btn-add">Ajouter l’employé</button>
+        </div>
+    </div>
 </div>
+
+<div class="grid">
+    <aside class="non-assigné">
+        <img src="images/task.webp" alt="">
+        <h2>Personnel non assigné</h2>
+    </aside>
+    <main class="P-etage">
+        <section class="conférence">
+            <img src="images/conference.webp" alt="">
+            <h2>Salle de conférence</h2>
+        </section>
+        <section class="Réception">
+            <img src="images/reception.webp" alt="">
+            <h2>Réception</h2>
+        </section>
+        <section class="serveurs">
+            <img src="images/database.webp" alt="">
+            <h2>Salle des serveurs</h2>
+        </section>
+        <section class="sécurité">
+            <img src="images/cyber-security.webp" alt="">
+            <h2>Salle de sécurité</h2>
+        </section>
+        <section class="personnel">
+            <img src="images/friends.webp" alt="">
+            <h2>Salle du personnel</h2>
+        </section>
+        <section class="archives">
+            <img src="images/folder.webp" alt="">
+            <h2>Salle d'archives</h2>
+        </section>
+    </main>
+</div>
+
 <footer class="bg-[#0d1b2a] text-center text-[#e0e1dd] py-4 text-sm">
-    <p class="Lg">GridView</p>
-    <p></p>
-    <p>&copy; 2025 GridView. Tous droits réservés. | Réalisé avec  par [Med_kr]</p>
+    <p>GridView</p>
+    <p>&copy; 2025 GridView. Tous droits réservés. | Réalisé par Med_kr</p>
 </footer>
 
-
-    <script src="main.js"></script>
+<script src="main.js"></script>
 </body>
 </html>
