@@ -139,6 +139,7 @@ input:focus, select:focus { border-color: var(--color-dex); box-shadow: 0 0 8px 
     border: 2px solid var(--color-dex);
 }
 
+
 .modal-footer { display: flex; justify-content: space-between; margin-top: 25px; }
 .btn-cancel, .btn-add { padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: .3s; }
 .btn-cancel { background: var(--color-b); border: 1px solid #ccc; }
@@ -156,3 +157,45 @@ input:focus, select:focus { border-color: var(--color-dex); box-shadow: 0 0 8px 
     .modal { width: 100%; padding: 18px; }
     .btn-add, .btn-cancel { width: 48%; }
 }
+
+
+.employee-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.employee-card img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.card-actions button {
+    padding: 5px 10px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background: #2980b9;
+    color: white;
+}
+
+.delete-btn {
+    background: #e74c3c;
+    color: white;
+}
+

@@ -9,6 +9,8 @@ cancel.onclick = () => overlay.style.display = "none";
 
 const input = document.querySelector("#photoInput");
 const avatar = document.querySelector("#avatar");
+const unassignedContainer = document.querySelector("list-n-attr");
+
 
 input.addEventListener("input", () => {
     if (input.value.trim() !== "") {
@@ -60,4 +62,72 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+});
+
+const unassignedList = document.getElementById('unassigned-list');
+const form = document.querySelector('#employee-form');
+function addEmployeeToUnassigned(employeeData) {
+    const employeeDiv = document.createElement('div');
+    employeeDiv.classList.add('unassigned-employee');
+    employeeDiv.style.cursor = 'pointer';
+    employeeDiv.style.border = '1px solid #ccc';
+    employeeDiv.style.padding = '10px';
+    employeeDiv.style.marginBottom = '5px';
+    employeeDiv.style.borderRadius = '5px';
+    employeeDiv.innerHTML = `
+        <img src="${employeeData.photo || 'https://via.placeholder.com/50'}" alt="avatar" style="width:40px; height:40px; border-radius:50%; margin-right:10px;">
+        <span class="employee-name">${employeeData.name}</span>
+        <button class="edit-employee" style="float:right; margin-left:5px;">✏️</button>
+        <button class="delete-employee" style="float:right; color:red; background:none; border:none; cursor:pointer;">❌</button>
+    `;
+
+    unassignedList.appendChild(employeeDiv);
+
+    employeeDiv.querySelector('.delete-employee').addEventListener('click', (e) => {
+        e.stopPropagation();
+        employeeDiv.remove();
+    });
+
+    employeeDiv.querySelector('.edit-employee').addEventListener('click', (e) => {
+        e.stopPropagation();
+        openEmployeeForm(employeeData, employeeDiv);
+    });
+
+    employeeDiv.addEventListener('click', () => {
+        openEmployeeForm(employeeData, employeeDiv);
+    });
+}
+
+function openEmployeeForm(employeeData, employeeDiv) {
+    overlay.style.display = 'flex';
+    input.value = employeeData.photo || '';
+    avatar.src = employeeData.photo || '';
+    avatar.style.display = employeeData.photo ? 'block' : 'none';
+    document.querySelector('#employeeName').value = employeeData.name || '';
+
+    const saveBtn = document.querySelector('#saveEmployee');
+    saveBtn.onclick = (event) => {
+        event.preventDefault();
+        employeeData.name = document.querySelector('#employeeName').value;
+        employeeData.photo = input.value;
+        employeeDiv.querySelector('.employee-name').textContent = employeeData.name;
+        employeeDiv.querySelector('img').src = employeeData.photo || 'https://via.placeholder.com/50';
+        overlay.style.display = 'none';
+    };
+}
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const newEmployee = {
+        name: document.querySelector('#employeeName').value,
+        photo: input.value,
+        experiences: []
+    };
+
+    addEmployeeToUnassigned(newEmployee);
+
+    form.reset();
+    avatar.style.display = 'none';
+    overlay.style.display = 'none';
 });
