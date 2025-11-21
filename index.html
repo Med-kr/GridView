@@ -1,108 +1,202 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <title>Gestion des employés</title>
-</head>
-<body>
-
-<header class="logo-ajoute">
-    <div id="logo">
-        <img src="images/logo-s.webp" alt="Logo">
-    </div>
-    <div class="ajoute-e">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestion des employés — GridView</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="logo-ajoute">
+      <div id="logo">
+        <img src="images/logo-s.webp" alt="Logo" />
+      </div>
+      <div class="search-container">
+        <input
+          type="text"
+          id="recherche"
+          placeholder="Rechercher un employé..."
+        />
+      </div>
+      <div class="ajoute-e">
         <button class="open-btn">+ Ajouter un employé</button>
-    </div>
-</header>
+      </div>
+    </header>
 
-<div class="overlay">
-    <div class="modal">
+    <!-- MODALE AJOUT / EDIT -->
+    <div class="overlay hidden" id="overlay">
+      <div
+        class="modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+      >
         <div class="modal-header">
-            Ajouter un nouvel employé
-            <button class="close">×</button>
+          <span id="modal-title">Ajouter un nouvel employé</span>
+          <button class="close" id="closeModal" title="Fermer">×</button>
         </div>
 
-        <label>Nom complet *</label>
-        <input type="text" placeholder="Jean Dupont">
+        <form id="employee-form" novalidate>
+          <label for="employeeName">Nom complet *</label>
+          <input
+            id="employeeName"
+            name="name"
+            type="text"
+            placeholder="Jean Dupont"
+            required
+          />
 
-        <label>Rôle *</label>
-        <select>
-            <option>Employé</option>
+          <label for="employeeRole">Rôle *</label>
+
+          <select id="employeeRole" name="role" required>
+            <option value="">-- Choisir un rôle --</option>
             <option>Réceptionniste</option>
             <option>Technicien IT</option>
             <option>Agent de sécurité</option>
-            <option>Directeur</option>
+            <option>Manager</option>
             <option>Nettoyage</option>
-        </select>
+            <option>Autre</option>
+          </select>
 
-        <label>Photo (URL)</label>
-        <input id="photoInput" type="url" placeholder="https://exemple.com/photo.jpg">
-        <img id="avatar" class="avatar-preview">
+          <label for="photoInput">Photo (URL)</label>
+          <input
+            id="photoInput"
+            name="photo"
+            type="url"
+            placeholder="https://exemple.com/photo.jpg"
+          />
+          <img id="avatar" class="avatar-preview" alt="preview" />
 
-        <label>Email *</label>
-        <input type="email" placeholder="jean.dupont@example.com">
+          <label for="employeeEmail">Email *</label>
+          <input
+            id="employeeEmail"
+            name="email"
+            type="email"
+            placeholder="jean.dupont@example.com"
+            required
+          />
 
-        <label>Téléphone *</label>
-        <input type="tel" placeholder="06 12 34 56 78">
+          <label for="employeePhone">Téléphone *</label>
+          <input
+            id="employeePhone"
+            name="phone"
+            type="tel"
+            placeholder="06 12 34 56 78"
+            required
+          />
 
-        <div class="experience-section">
+          <div class="experience-section">
             <h3>Expériences professionnelles</h3>
-            <button type="button" class="add-experience-btn">+ Ajouter</button>
-        </div>
-        <div id="experience-list" class="experience-list-container">
+            <button
+              type="button"
+              class="add-experience-btn"
+              id="addExperienceBtn"
+            >
+              + Ajouter
+            </button>
+          </div>
+          <div id="experience-list" class="experience-list-container">
             <div class="no-experience">Aucune expérience ajoutée</div>
-        </div>
+          </div>
 
-        <div class="modal-footer">
-            <button class="btn-cancel">Annuler</button>
-            <button class="btn-add">Ajouter l’employé</button>
-        </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-cancel" id="cancelBtn">
+              Annuler
+            </button>
+            <button type="submit" class="btn-add" id="saveEmployee">
+              Ajouter l’employé
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-</div>
 
-<div class="grid">
-    <aside class="non-assigné">
-        <img src="images/task.webp" alt="">
+    <!-- PROFILE OVERLAY -->
+    <div class="profile-overlay hidden" id="profileOverlay">
+      <div class="profile-modal" role="dialog" aria-modal="true">
+        <button class="close-profile" id="closeProfile">×</button>
+        <div class="profile-content" id="profileContent"></div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <aside class="non-assigné">
+        <img src="images/task.webp" alt="" />
         <h2>Personnel non assigné</h2>
+        <!-- Conteneur obligatoire -->
+        <div id="unassigned-list" class="list-n-attr"></div>
+      </aside>
 
-        <div class="list-n-attr"></div>
-    </aside>
-    <main class="P-etage">
-        <section class="conférence">
-            <img src="images/conference.webp" alt="">
-            <h2>Salle de conférence</h2>
+      <main class="P-etage" id="floorPlan">
+        <section
+          class="conference"
+          data-zone="Salle de conférence"
+          data-capacity="6"
+        >
+          <img src="images/conference.webp" alt="" />
+          <h2>Salle de conférence</h2>
+          <button class="assign-btn">+</button>
+          <div class="zone-people"></div>
         </section>
-        <section class="Réception">
-            <img src="images/reception.webp" alt="">
-            <h2>Réception</h2>
-        </section>
-        <section class="serveurs">
-            <img src="images/database.webp" alt="">
-            <h2>Salle des serveurs</h2>
-        </section>
-        <section class="sécurité">
-            <img src="images/cyber-security.webp" alt="">
-            <h2>Salle de sécurité</h2>
-        </section>
-        <section class="personnel">
-            <img src="images/friends.webp" alt="">
-            <h2>Salle du personnel</h2>
-        </section>
-        <section class="archives">
-            <img src="images/folder.webp" alt="">
-            <h2>Salle d'archives</h2>
-        </section>
-    </main>
-</div>
 
-<footer class="bg-[#0d1b2a] text-center text-[#e0e1dd] py-4 text-sm">
-    <p>GridView</p>
-    <p>&copy; 2025 GridView. Tous droits réservés. | Réalisé par Med_kr</p>
-</footer>
+        <section class="reception" data-zone="Réception" data-capacity="2">
+          <img src="images/reception.webp" alt="" />
+          <h2>Réception</h2>
+          <button class="assign-btn">+</button>
+          <div class="zone-people"></div>
+        </section>
 
-<script src="main.js"></script>
-</body>
+        <section
+          class="serveurs"
+          data-zone="Salle des serveurs"
+          data-capacity="3"
+        >
+          <img src="images/database.webp" alt="" />
+          <h2>Salle des serveurs</h2>
+          <button class="assign-btn">+</button>
+          <div class="zone-people"></div>
+        </section>
+
+        <section
+          class="securite"
+          data-zone="Salle de sécurité"
+          data-capacity="3"
+        >
+          <img src="images/cyber-security.webp" alt="" />
+          <h2>Salle de sécurité</h2>
+          <button class="assign-btn">+</button>
+          <div class="zone-people"></div>
+        </section>
+
+        <section
+          class="personnel"
+          data-zone="Salle du personnel"
+          data-capacity="6"
+        >
+          <img src="images/friends.webp" alt="" />
+          <h2>Salle du personnel</h2>
+          <button class="assign-btn">+</button>
+          <div class="zone-people"></div>
+        </section>
+
+        <section
+          class="archives"
+          data-zone="Salle d'archives"
+          data-capacity="2"
+        >
+          <img src="images/folder.webp" alt="" />
+          <h2>Salle d'archives</h2>
+          <button class="assign-btn">+</button>
+          <div class="zone-people"></div>
+        </section>
+      </main>
+    </div>
+
+    <footer>
+      <p>GridView</p>
+      <p>&copy; 2025 GridView. Tous droits réservés. | Réalisé par Med_kr</p>
+    </footer>
+
+    <script src="main.js"></script>
+  </body>
 </html>
