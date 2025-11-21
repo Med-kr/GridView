@@ -1,201 +1,770 @@
+/*****************************  VARIABLES GLOBALES *****************************/
+
 :root {
-    --color-a: #fff;
-    --color-trois: #1A535C;
-    --color-dex: #4ECDC4;
-    --color-b: #F5F5F5;
-    --color-qua: #FF6B6B;
-    --color-cinq: #FFA800;
-    --color-text: #000;
-    --font-title: "Roboto Slab", serif;
-    --font-text: "Open Sans", sans-serif;
+  --color-a: #fff;
+  --color-trois: #1a535c;
+  --color-dex: #4ecdc4;
+  --color-b: #f5f5f5;
+  --color-qua: #f63b3b38;
+  --color-cinq: #ffa800;
+  --color-text: #000;
+  --font-title: "Roboto Slab", serif;
+  --font-text: "Open Sans", sans-serif;
 }
 
+/*****************************  RESET *****************************/
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
 }
 
 body {
-    font-family: var(--font-text);
-    background-image: url(images/arriere.webp);
-    background-size: cover;
-    background-repeat: no-repeat;
-    color: var(--color-text);
+  font-family: var(--font-text);
+  background-image: url(images/arriere.webp);
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
 }
 
+/*****************************  HEADER *****************************/
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ffffffde;
-    padding: 15px 40px;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffffde;
+  padding: 15px 40px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 header #logo img {
-    height: 100px;
+  height: 100px;
 }
 
 .ajoute-e button {
-    background-color: rgb(77, 255, 133);
-    height: 30px;
-    width: 150px;
-    font-size: 12px;
-    font-weight: bold;
-    border-radius: 30px;
+  background-color: #2c2c2cff;
+  color: white;
+  height: 34px;
+  width: 160px;
+  border: none;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
 }
 
 .ajoute-e button:hover {
-    background-color: aqua;
+  background-color: rgba(0, 255, 255, 0.743);
+  color: black;
 }
 
+/*****************************  GRID LAYOUT *****************************/
 .grid {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 20px;
-    margin: 30px;
+  display: grid;
+  grid-template-columns: 330px 1fr;
+  gap: 20px;
+  margin: 30px;
+  flex: 1;
 }
 
+/* ===================== RECHERCHE EMPLOYÉ ===================== */
+#recherche {
+  width: 100%;
+  max-width: 320px;
+  padding: 10px 14px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.25s ease;
+  margin-bottom: 20px;
+  display: block;
+}
+
+#recherche:focus {
+  border-color: #4ecdc5bc;
+  box-shadow: 0 0 5px rgba(78, 205, 196, 0.5);
+}
+
+.search-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+/*****************************  PERSONNEL NON ASSIGNÉ *****************************/
 .non-assigné {
-    background-color: aliceblue;
-    padding: 20px;
-    height: 60vh;
+  background-color: aliceblue;
+  padding: 20px;
+  height: 70vh;
+  overflow-y: auto;
+  border-radius: 20px;
+  border: 3px solid #000000;
 }
 
-.P-etage {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    text-align: center;
+.list-n-attr {
+  margin-top: 20px;
 }
-
-.P-etage section {
-    padding: 15px;
-    border-radius: 10px;
-    color: #fff;
-}
-
-.conférence, .Réception, .serveurs { background-color: red; }
-.sécurité, .personnel, .archives { background-color: green; }
-
-.P-etage img, .non-assigné img {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-}
-
-h2 { font-size: 1.1rem; font-weight: bold; }
-
-.overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.55);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-    padding: 20px;
-}
-
-.modal {
-    background: var(--color-a);
-    width: 460px;
-    max-width: 100%;
-    padding: 25px;
-    border-radius: 14px;
-    box-shadow: 0 5px 25px rgba(0,0,0,0.25);
-    animation: fadeIn 0.25s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-.modal-header { display: flex; justify-content: space-between; font-family: var(--font-title); font-size: 20px; color: var(--color-trois); }
-
-.close { font-size: 26px; background: none; border: none; cursor: pointer; color: var(--color-qua); }
-
-label { display: block; margin-top: 15px; margin-bottom: 6px; font-weight: 600; }
-input, select {
-    width: 100%;
-    padding: 12px 15px;
-    border: 2px solid #ccc;
-    border-radius: 12px;
-    outline: none;
-    background: var(--color-b);
-}
-
-input:focus, select:focus { border-color: var(--color-dex); box-shadow: 0 0 8px rgba(78,205,196,0.5); }
-
-.avatar-preview {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    margin: 12px auto;
-    object-fit: cover;
-    display: none;
-    border: 2px solid var(--color-dex);
-}
-
-
-.modal-footer { display: flex; justify-content: space-between; margin-top: 25px; }
-.btn-cancel, .btn-add { padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: .3s; }
-.btn-cancel { background: var(--color-b); border: 1px solid #ccc; }
-.btn-add { background: var(--color-trois); color: #fff; border: none; }
-.btn-cancel:hover { background: #ddd; }
-.btn-add:hover { background: var(--color-dex); }
-
-.experience-section { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-top: 15px; }
-.add-experience-btn { background: var(--color-a); color: var(--color-dex); border: 1px solid var(--color-dex); padding: 8px 15px; border-radius: 20px; cursor: pointer; }
-.add-experience-btn:hover { background-color: rgba(78,205,196,0.12); }
-.experience-list-container { padding-bottom: 20px; }
-.no-experience { text-align: center; padding: 40px 20px; background-color: var(--color-b); border: 1px solid var(--color-dex); border-radius: 8px; color: #666; font-style: italic; }
-
-@media (max-width: 550px) {
-    .modal { width: 100%; padding: 18px; }
-    .btn-add, .btn-cancel { width: 48%; }
-}
-
 
 .employee-card {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 10px;
-    margin: 10px 0;
-    text-align: center;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 12px;
+  margin: 12px 0;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.employee-card:hover {
+  transform: translateY(-4px);
 }
 
 .employee-card img {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
-}
-
-.card-actions {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 10px;
-}
-
-.card-actions button {
-    padding: 5px 10px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-}
-
-.edit-btn {
-    background: #2980b9;
-    color: white;
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
 }
 
 .delete-btn {
-    background: #e74c3c;
-    color: white;
+  background: #181514;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
+/*****************************  PLAN D'ÉTAGE *****************************/
+.P-etage {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  text-align: center;
+}
+
+.P-etage section {
+  padding: 15px;
+  border-radius: 10px;
+  color: #000000;
+  position: relative;
+}
+
+.conference,
+.serveurs,
+.securite,
+.archives {
+  background-color: var(--color-qua);
+  border: 3px solid #000000;
+}
+.reception,
+.personnel {
+  background-color: #9e9c9c30;
+  border: 3px solid #000000;
+}
+section:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  transform: scale(1.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.P-etage img,
+.non-assigné img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.assign-btn {
+  background-color: rgba(0, 255, 255, 0.387);
+  color: #000;
+  font-weight: bold;
+  padding: 7px 13px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.assign-btn:hover {
+  background-color: aqua;
+}
+
+/*****************************  ZONE EMPLOYÉ (dans une salle) *****************************/
+.zone-people {
+  margin-top: 12px;
+}
+
+.zone-employee {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffffc5;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.zone-employee img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.zone-employee button.remove {
+  position: absolute;
+  right: 10px;
+  top: 7px;
+  background: #e63946;
+  border: none;
+  color: white;
+  font-weight: bold;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/*****************************  MODALE AJOUT EMPLOYÉ *****************************/
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  padding: 20px;
+}
+
+.overlay:not(.hidden) {
+  display: flex;
+}
+
+.modal {
+  background: var(--color-a);
+  width: 460px;
+  max-width: 100%;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-title);
+  font-size: 20px;
+  color: var(--color-trois);
+}
+
+.close {
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-qua);
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  outline: none;
+  background: var(--color-b);
+}
+
+input:focus,
+select:focus {
+  border-color: var(--color-dex);
+  box-shadow: 0 0 8px rgba(78, 205, 196, 0.5);
+}
+
+.avatar-preview {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  margin: 12px auto;
+  object-fit: cover;
+  display: none;
+  border: 2px solid var(--color-dex);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+
+.btn-cancel,
+.btn-add {
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-cancel {
+  background: var(--color-b);
+  border: 1px solid #ccc;
+}
+
+.btn-add {
+  background: var(--color-trois);
+  color: #fff;
+  border: none;
+}
+
+.btn-cancel:hover {
+  background: #ddd;
+}
+.btn-add:hover {
+  background: var(--color-dex);
+}
+
+/*****************************  EXPÉRIENCES PROFESSIONNELLES *****************************/
+.experience-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-top: 15px;
+}
+
+.add-experience-btn {
+  background: var(--color-a);
+  color: var(--color-dex);
+  border: 1px solid var(--color-dex);
+  padding: 7px 13px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.add-experience-btn:hover {
+  background-color: rgba(78, 205, 196, 0.12);
+}
+
+.experience-list-container {
+  padding-bottom: 20px;
+}
+
+.no-experience {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: var(--color-b);
+  border: 1px solid var(--color-dex);
+  border-radius: 8px;
+  color: #666;
+  font-style: italic;
+}
+
+/*****************************  PROFILE OVERLAY *****************************/
+.profile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+}
+
+.profile-overlay:not(.hidden) {
+  display: flex;
+}
+
+.profile-modal {
+  background: white;
+  width: 450px;
+  padding: 25px;
+  border-radius: 15px;
+}
+
+.profile-modal img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 20px;
+}
+
+.close-profile {
+  font-size: 26px;
+  background: none;
+  border: none;
+  float: right;
+  cursor: pointer;
+}
+
+.profile-content h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/*****************************  FOOTER *****************************/
+footer {
+  background-color: #ffffffde;
+  color: #000000;
+  text-align: center;
+  padding: 1.2rem 0;
+  font-size: 0.9rem;
+  border: 2px solid #2f3133;
+  letter-spacing: 0.3px;
+}
+
+footer p {
+  margin: 4px 0;
+}
+
+/*****************************  RESPONSIVE DESIGN *****************************/
+
+/****************************** Grand écran d'ordinateur : plus de 1280px de large ******************************/
+@media screen and (min-width: 1280px) {
+  .grid {
+    grid-template-columns: 330px 1fr;
+    margin: 30px;
+    gap: 20px;
+  }
+
+  .P-etage {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/****************************** Petit écran d'ordinateur : entre 1024px et 1279px ******************************/
+@media screen and (min-width: 1024px) and (max-width: 1279px) {
+  .grid {
+    grid-template-columns: 280px 1fr;
+    margin: 25px;
+    gap: 18px;
+  }
+
+  .P-etage {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  header {
+    padding: 15px 30px;
+  }
+
+  .non-assigné {
+    height: 65vh;
+  }
+}
+
+/****************************** Tablette : entre 768px et 1023px ******************************/
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "non-assigne"
+      "plan";
+    margin: 20px;
+    gap: 15px;
+  }
+
+  .non-assigné {
+    grid-area: non-assigne;
+    height: 300px;
+  }
+
+  .P-etage {
+    grid-area: plan;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  header {
+    padding: 12px 20px;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  header #logo img {
+    height: 80px;
+  }
+
+  .search-container {
+    justify-content: flex-start;
+  }
+
+  #recherche {
+    max-width: 100%;
+  }
+}
+
+/****************************** Mobile : jusqu'à 767px ******************************/
+@media screen and (max-width: 767px) {
+  .grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    margin: 15px;
+    gap: 12px;
+  }
+
+  .P-etage {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .non-assigné {
+    height: 250px;
+    order: 1;
+    padding: 15px;
+  }
+
+  .P-etage {
+    order: 2;
+  }
+
+  header {
+    padding: 10px 15px;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+
+  header #logo img {
+    height: 70px;
+  }
+
+  .ajoute-e button {
+    width: 140px;
+    height: 32px;
+    font-size: 12px;
+  }
+
+  .search-container {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  #recherche {
+    max-width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  body {
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+  }
+
+  .employee-card {
+    padding: 10px;
+    margin: 8px 0;
+  }
+
+  .employee-card img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .list-n-attr {
+    margin-top: 15px;
+  }
+
+  .modal,
+  .profile-modal {
+    width: 90%;
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-cancel,
+  .btn-add {
+    width: 100%;
+  }
+
+  .zone-employee {
+    padding: 8px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .zone-employee img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .zone-employee button.remove {
+    position: static;
+    margin-top: 5px;
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
+  .grid {
+    grid-template-columns: 250px 1fr;
+    grid-template-areas:
+      "non-assigne plan"
+      "non-assigne plan";
+  }
+
+  .non-assigné {
+    height: 60vh;
+    grid-area: non-assigne;
+  }
+
+  .P-etage {
+    grid-template-columns: repeat(2, 1fr);
+    grid-area: plan;
+  }
+
+  body {
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+/****************************** Tablette Paysage : entre 1024px et 1279px en orientation paysage ******************************/
+@media screen and (min-width: 1024px) and (max-width: 1279px) and (orientation: landscape) {
+  .grid {
+    grid-template-columns: 300px 1fr;
+  }
+
+  .non-assigné {
+    height: 70vh;
+  }
+}
+
+/****************************** Améliorations pour très petits écrans ******************************/
+@media screen and (max-width: 480px) {
+  body {
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .grid {
+    margin: 10px;
+    gap: 10px;
+    grid-template-areas:
+      "non-assigne"
+      "plan";
+  }
+
+  .non-assigné {
+    grid-area: non-assigne;
+    order: 1;
+  }
+
+  .P-etage {
+    grid-area: plan;
+    order: 2;
+  }
+
+  .P-etage section {
+    padding: 12px;
+  }
+
+  .non-assigné {
+    padding: 12px;
+    height: 200px;
+  }
+
+  .employee-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+    padding: 8px;
+  }
+
+  .employee-card img {
+    width: 45px;
+    height: 45px;
+    margin-bottom: 0;
+  }
+
+  .modal-header {
+    font-size: 18px;
+  }
+
+  input,
+  select {
+    padding: 10px 12px;
+  }
+}
+
+@media screen and (min-height: 1000px) {
+  .non-assigné {
+    height: 60vh;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .employee-card:hover,
+  .assign-btn:hover,
+  section:hover {
+    transform: none;
+  }
+
+  .assign-btn,
+  .delete-btn,
+  .ajoute-e button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+@media print {
+  .ajoute-e,
+  .assign-btn,
+  .delete-btn,
+  .remove {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+  }
+}
