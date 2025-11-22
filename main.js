@@ -54,7 +54,7 @@ function saveData() {
     }));
 }
 
-/* function createDemoEmployees() {
+function createDemoEmployees() {
     return [
         { id: 1, name: "Alice Durand", role: "Réceptionniste", photo: "https://randomuser.me/api/portraits/women/1.jpg", email: "alice.durand@corp.com", phone: "0610203040", experiences: [], location: null },
         { id: 2, name: "Bob Martin", role: "Technicien IT", photo: "https://randomuser.me/api/portraits/men/2.jpg", email: "bob.martin@corp.com", phone: "0620304050", experiences: [], location: "Salle des serveurs" },
@@ -63,7 +63,7 @@ function saveData() {
         { id: 5, name: "Eric Fournier", role: "Nettoyage", photo: "https://randomuser.me/api/portraits/men/5.jpg", email: "eric.fournier@corp.com", phone: "0650607080", experiences: [], location: null },
         { id: 6, name: "Fanny Leroy", role: "Autre", photo: "https://randomuser.me/api/portraits/women/6.jpg", email: "fanny.leroy@corp.com", phone: "0660708090", experiences: [], location: "Salle de conférence" }
     ];
-} */
+}
 
 /***************************** RENDU (Affichage) *****************************/
 
